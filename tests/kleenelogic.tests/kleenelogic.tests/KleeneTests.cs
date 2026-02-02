@@ -212,11 +212,11 @@ public sealed class KleeneTests
             _ = Kleene.True || Rhs();
             Assert.Equal(2, called);
 
-            // False should not short-circuit for &&
+            // True should not short-circuit for &&
             _ = Kleene.True && Rhs();
             Assert.Equal(3, called);
 
-            // True should not short-circuit for ||
+            // False should not short-circuit for ||
             _ = Kleene.False || Rhs();
             Assert.Equal(4, called);
         }

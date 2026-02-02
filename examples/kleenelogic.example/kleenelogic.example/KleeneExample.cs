@@ -16,10 +16,10 @@ public static class KleeneExample
         int Legs
     );
 
-    [Fact]
     public static void Run()
     {
         Console.WriteLine("=== Example: HelloZoo 🦁🐘🐍 ===");
+        Console.WriteLine();
         
         var animals = new List<Animal>
         {
@@ -29,16 +29,16 @@ public static class KleeneExample
             new("Whiskers",   "Cat",        Kleene.True,    Kleene.True,    4),
             new("Rex",        "Dog",        Kleene.Unknown, Kleene.True,    4),
             new("George",     "Monkey",     Kleene.Unknown, Kleene.Unknown, 2),
-            new("Porky",      "Pig",        Kleene.False,   Kleene.True,    4),
+            new("Porky",      "Pig",        Kleene.Unknown, Kleene.True,    4),
             new("Henrietta",  "Chicken",    Kleene.False,   Kleene.True,    2),
             new("Thumper",    "Rabbit",     Kleene.False,   Kleene.True,    4),
             new("Peanut",     "Guinea pig", Kleene.False,   Kleene.True,    4),
             new("Kaa",        "Snake",      Kleene.True,    Kleene.False,   0),
 
             // A few illustrative extras
-            new("Goldie",     "Goldfish",   Kleene.Unknown, Kleene.Unknown, 0),
+            new("Sparkle",    "Goldfish",   Kleene.False,   Kleene.Unknown, 0),
             new("Spike",      "T-Rex",      Kleene.True,    Kleene.False,   2),
-            new("Marsian",    "Alian",      Kleene.Unknown, Kleene.Unknown, 3),
+            new("Marty",      "Alien",      Kleene.Unknown, Kleene.Unknown, 3),
         };
 
         PrintRoster(animals);

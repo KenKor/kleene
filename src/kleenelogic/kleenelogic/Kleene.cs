@@ -6,62 +6,33 @@ namespace KleeneLogic
     /// <summary>
     /// Kleene's strong three-valued logic (K3).
     ///
-    /// Truth values are represented using the ordered set:
+    /// Values are encoded as:
+    ///   False   = -1
+    ///   Unknown =  0
+    ///   True    = +1
     ///
-    ///     False   = -1
-    ///     Unknown =  0
-    ///     True    = +1
-    ///
-    /// This numeric encoding is intentional and algebraically meaningful:
-    ///
+    /// The encoding makes the core operators simple:
     ///   NOT(x)   = -x
     ///   AND(a,b) = min(a,b)
     ///   OR(a,b)  = max(a,b)
     ///
-    /// These operators obey the standard K3 truth tables and De Morgan laws.
-    ///
-    /// XOR is not canonical in K3; the chosen semantics are:
+    /// XOR is a chosen lift for K3:
     ///   - Unknown propagates
     ///   - Otherwise behaves like boolean XOR
-    ///
-    /// With the {-1,0,+1} encoding:
     ///   XOR(a,b) = -(a*b)
     ///
-    /// ----------------------------------------
-    /// Control-flow semantics (IMPORTANT)
-    /// ----------------------------------------
+    /// Control-flow semantics:
+    ///   - operator true returns true only for True
+    ///   - operator false returns true only for False
+    ///   - Unknown is neither
     ///
-    /// This type intentionally defines:
+    /// So:
+    ///   if (k) executes only for True
+    ///   if (!k) executes only for False
+    ///   else means "not definitively true"
     ///
-    ///     operator true
-    ///     operator false
-    ///
-    /// with the following meaning:
-    ///
-    ///   - true  only when value == True   (+1)
-    ///   - false only when value == False  (-1)
-    ///   - Unknown is neither true nor false
-    ///
-    /// Consequences:
-    ///
-    ///   if (k)         executes only for True
-    ///   if (!k)        executes only for False
-    ///   else           means: "not definitely true"
-    ///
-    /// Short-circuiting operators (&&, ||) are enabled and behave as follows:
-    ///
-    ///   - Short-circuit happens only for fully-resolved values
-    ///   - Unknown does NOT short-circuit and evaluates the RHS
-    ///
-    /// This matches the design intent:
-    ///   - Unknown does not control flow
-    ///   - Only definitive knowledge does
-    ///
-    /// This behavior is deliberate and suitable for domains such as:
-    ///   - unit systems
-    ///   - dimensional analysis
-    ///   - constraint propagation
-    ///   - staged validation pipelines
+    /// Short-circuiting (&&, ||) happens only for definitive values.
+    /// Unknown evaluates the RHS.
     ///
     /// NOTE:
     ///   Using 'else' after 'if (Kleene)' merges False and Unknown.

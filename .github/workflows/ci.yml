@@ -21,10 +21,9 @@ jobs:
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
         with:
-          # If you're truly using .NET 10 (preview), keep this.
-          # If you're on net8.0 or net9.0, set accordingly.
+          # We're on .NET 10 (preview allowed).
           dotnet-version: "10.0.x"
-          # include-prerelease: true  # Uncomment if you're on preview builds.
+          include-prerelease: true
 
       - name: Restore
         run: dotnet restore ./kleene.sln

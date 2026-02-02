@@ -2,7 +2,7 @@
 
 > *Because sometimes the correct answer is not “yes” or “no”, but “we don’t know yet”.*
 
-This repository contains a small, fast, documented implementation of **Kleene’s strong three-valued logic (K3)** for C# / .NET, together with examples and tests.
+This repository contains a compact, fast implementation of **Kleene’s strong three-valued logic (K3)** for C# / .NET, with examples and tests.
 
 ## TL;DR
 
@@ -11,9 +11,8 @@ This repository contains a small, fast, documented implementation of **Kleene’
 - **Kleene** or **three-valued** logic gives you `True`, `False`, and `Unknown` with real logic operators
 - `Unknown` is designated uncertainty, not “false by accident”
 
-If you’ve ever pulled a nullable Boolean from a database and thought
-> “I wish I could reason about this without losing information”  
-then this library is for you.
+If you’ve pulled a nullable Boolean from a database and wished you could keep the uncertainty,
+this library is for that.
 
 ---
 
@@ -75,7 +74,7 @@ This implementation uses Kleene’s strong logic (K3) with explicit values:
 | `False` | Definitively false               | `-1` |
 | `Unknown` | Not enough information yet     | `0` |
 
-Thanks to the `{-1, 0, +1}` representation, the core operators become trivial and fast:
+With the `{-1, 0, +1}` representation, the core operators are simple and fast:
 
 | Operator | Definition |
 |--------|------------|
@@ -109,7 +108,7 @@ false → only when value is False
 
 Unknown → neither true nor false
 
-Consequences
+Consequences:
 ```csharp
 if (k)        // runs only if k == True
 if (!k)       // runs only if k == False
@@ -119,19 +118,19 @@ If `k == Unknown`, neither executes.
 
 This is deliberate.
 
-Short-circuiting (&&, ||)
+Short-circuiting (`&&`, `||`)
 
 `False && RHS()` short-circuits, and does not evaluate Right Hand Side `RHS()`.
 
 `True || RHS()` short-circuits, and does not evaluate Right Hand Side `RHS()`.
 
-`Unknown && RHS()` or `Unknown || RHS()` do not short-circuit: → `RHS()` is evaluated.
+`Unknown && RHS()` or `Unknown || RHS()` do not short-circuit: the RHS is evaluated.
 
-This is conform the philosophy:
+This follows the philosophy:
 
 `Unknown` does not control flow — only definitive knowledge does.
 
-A word of caution about else:
+A word of caution about `else`:
 
 ```csharp
 if (k)
@@ -146,7 +145,7 @@ else
 
 else means “not definitively true”, not “false”.
 
-This holds also for:
+This also holds for:
 
 ```csharp
 if (!k)
@@ -159,7 +158,7 @@ else
 }
 ```
 
-For true three-way logic, be implicit:
+For three-way logic, use an explicit chain:
 
 ```csharp
 if (k) { ... }
@@ -167,7 +166,7 @@ else if (!k) { ... }
 else { /* Unknown */ }
 ```
 
-Or be explicit:
+Or use the explicit properties:
 
 ```csharp
 if (k.IsTrue) { ... }
@@ -192,7 +191,7 @@ The program:
 - demonstrates `if`, `&&`, `||`
 - shows how `Unknown` naturally propagates
 
-It’s intentionally simple, the logic is the point.
+It’s intentionally simple; the logic is the point.
 
 ---
 
@@ -275,19 +274,19 @@ Log("Decision deferred: insufficient data");
 }
 ```
 
-This is what Kleene is intended for.
+That’s what Kleene is intended for.
 
 ---
 
-## Final words
+## When to use it
 
-This library does not try to pretend that three-valued logic is boolean logic.
+This library doesn’t pretend three-valued logic is boolean logic.
 
 Use Kleene logic when:
 
 - `bool?` appears in your code
-* `NULL` has real meaning
+- `NULL` has real meaning
 - you want to reason without throwing or guessing
 - “unknown” is a first-class state
 
-If everything is always known, `bool` is better.
+If everything is always known, `bool` is simpler and better.
