@@ -1,0 +1,39 @@
+name: Publish NuGet
+
+on:
+  push:
+    tags:
+      - "v*.*.*"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  pack-and-publish:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "10.0.x"
+          # include-prerelease: true  # Uncomment if you're on preview builds.
+
+      - name: Restore
+        run: dotnet restore ./kleene.sln
+
+      - name: Build (Release)
+        run: dotnet build ./kleene.sln -c Release --no-restore
+
+      - name: Test (Release)
+        run: dotnet test ./kleene.sln -c Release --no-build --verbosity normal
+
+      - name: Pack (Release)
+        run: dotnet pack ./src/kleenelogic/kleenelogic.csproj -c Release --no-build -o ./artifacts
+
+      - name: Publish to NuGet.org
+        run: dotnet nuget push "./artifacts/*.nupkg" --api-key "${{ secrets.NUGET_API_KEY }}" --source "https://api.nuget.org/v3/index.json" --skip-duplicate
