@@ -9,6 +9,13 @@ namespace KleeneLogic.Tests;
 
 public sealed class KleeneParsingAndJsonTests
 {
+    [Fact]
+    public void TryParse_ReturnsFalse_OnNull()
+    {
+        string? input = null;
+        Assert.False(Kleene.TryParse(input, out _));
+    }
+
     [Theory]
     [InlineData("True",  1)]
     [InlineData("true",  1)]
@@ -37,6 +44,22 @@ public sealed class KleeneParsingAndJsonTests
     public void TryParse_RejectsNonCanonicalInputs(string input)
     {
         Assert.False(Kleene.TryParse(input, out _));
+    }
+
+    [Fact]
+    public void Parse_Throws_OnNull()
+    {
+        string? input = null;
+        Assert.Throws<FormatException>(() => Kleene.Parse(input!));
+    }
+
+    [Theory]
+    [InlineData("")]
+    [InlineData("   ")]
+    [InlineData("maybe")]
+    public void Parse_Throws_OnInvalidInputs(string input)
+    {
+        Assert.Throws<FormatException>(() => Kleene.Parse(input));
     }
 
     [Theory]
@@ -119,6 +142,19 @@ public sealed class KleeneParsingAndJsonTests
     [InlineData("{}")]
     [InlineData("[]")]
     public void Json_RejectsInvalidInputs(string json)
+    {
+        var opts = new JsonSerializerOptions();
+        opts.Converters.Add(new KleeneJsonConverter());
+
+        Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<Kleene>(json, opts));
+    }
+
+    [Theory]
+    [InlineData("1.0")]
+    [InlineData("-1.0")]
+    [InlineData("1e0")]
+    [InlineData("1E0")]
+    public void Json_RejectsNonIntegerNumbers(string json)
     {
         var opts = new JsonSerializerOptions();
         opts.Converters.Add(new KleeneJsonConverter());
