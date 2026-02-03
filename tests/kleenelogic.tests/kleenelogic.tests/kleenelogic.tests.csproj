@@ -20,7 +20,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\..\src\kleenelogic\kleenelogic\kleenelogic.csproj" />
+      <ProjectReference Include="..\..\..\src\kleenelogic\kleenelogic.csproj" />
     </ItemGroup>
 
 </Project>

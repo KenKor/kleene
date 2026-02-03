@@ -23,7 +23,7 @@ jobs:
         with:
           # We're on .NET 10 (preview allowed).
           dotnet-version: "10.0.x"
-          include-prerelease: true
+          dotnet-quality: "preview"
 
       - name: Restore
         run: dotnet restore ./kleene.sln

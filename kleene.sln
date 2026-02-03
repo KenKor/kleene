@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "kleenelogic", "src/kleenelogic/kleenelogic/kleenelogic.csproj", "{4C758D68-5745-49ED-A2D2-94B3A145C205}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "kleenelogic", "src/kleenelogic/kleenelogic.csproj", "{4C758D68-5745-49ED-A2D2-94B3A145C205}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "kleenelogic.tests", "tests/kleenelogic.tests/kleenelogic.tests/kleenelogic.tests.csproj", "{9B3BA396-1E46-4833-95CE-D3F979DCD1C2}"
 EndProject
