@@ -320,3 +320,13 @@ Use Kleene logic when:
 - “unknown” is a first-class state
 
 If everything is always known, `bool` is simpler and better.
+
+---
+
+## Release information
+
+| Version | Notes                |
+|---------|----------------------|
+| 1.0.0   | Initial release      |
+| 1.0.1   | Test release process |
+
