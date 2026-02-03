@@ -83,6 +83,23 @@ public sealed class KleeneTests
             Assert.Null(Kleene.Unknown.ToNullableBool());
         }
 
+        [Fact]
+        public void Default_Kleene_UsesFallbackOnlyForUnknown()
+        {
+            Assert.Equal(Kleene.True,    Kleene.True.Default(Kleene.False));
+            Assert.Equal(Kleene.False,   Kleene.False.Default(Kleene.True));
+            Assert.Equal(Kleene.True,    Kleene.Unknown.Default(Kleene.True));
+        }
+
+        [Fact]
+        public void Default_Bool_UsesFallbackOnlyForUnknown()
+        {
+            Assert.True(Kleene.True.Default(false));
+            Assert.False(Kleene.False.Default(true));
+            Assert.True(Kleene.Unknown.Default(true));
+            Assert.False(Kleene.Unknown.Default(false));
+        }
+
         // --------
         // Core logical operators
         // --------

@@ -62,6 +62,13 @@ var canProceed = isApproved & hasPermission & !isSuspended;
 
 Without accidentally treating `null` as `false`.
 
+You can also provide explicit defaults when you need to collapse values:
+
+```csharp
+Kleene isAllowed = ruleResult.Default(Kleene.False);
+bool canProceed = isApproved.Default(false);
+```
+
 ---
 
 ## Algebraic design
@@ -158,7 +165,7 @@ else
 }
 ```
 
-For three-way logic, use an explicit chain:
+For three-way logic, use an true/false operators:
 
 ```csharp
 if (k) { ... }

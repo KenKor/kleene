@@ -60,6 +60,24 @@ namespace KleeneLogic
         public bool IsFalse   => _v < 0;
         public bool IsUnknown => _v == 0;
 
+        /// <summary>
+        /// Returns this value if it is definitively True or False;
+        /// otherwise returns the provided default when the value is Unknown.
+        ///
+        /// This mirrors Nullable&lt;T&gt;.GetValueOrDefault for Kleene values.
+        /// </summary>
+        public Kleene Default(Kleene defaultValue)
+            => _v == 0 ? defaultValue : this;
+
+        /// <summary>
+        /// Returns this value as a boolean if it is definitively True or False;
+        /// otherwise returns the provided default when the value is Unknown.
+        ///
+        /// This is the explicit, intentional way to collapse Kleene logic to bool.
+        /// </summary>
+        public bool Default(bool defaultValue)
+            => _v == 0 ? defaultValue : _v > 0;
+
         public override string ToString() => _v switch
         {
             -1 => "False",
