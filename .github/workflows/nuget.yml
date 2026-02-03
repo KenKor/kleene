@@ -30,7 +30,7 @@ jobs:
         run: dotnet test ./kleene.sln -c Release --no-build
 
       - name: Pack (library only)
-        run: dotnet pack ./src/kleenelogic/kleenelogic/kleenelogic.csproj -c Release --no-build -o ./artifacts
+        run: dotnet pack ./src/kleenelogic/kleenelogic.csproj -c Release --no-build -o ./artifacts
 
       - name: Publish
         run: dotnet nuget push "./artifacts/*.nupkg" --api-key "${{ secrets.NUGET_API_KEY }}" --source https://api.nuget.org/v3/index.json --skip-duplicate
