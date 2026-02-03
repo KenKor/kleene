@@ -78,13 +78,95 @@ namespace KleeneLogic
         public bool Default(bool defaultValue)
             => _v == 0 ? defaultValue : _v > 0;
 
-        public override string ToString() => _v switch
+        /// <summary>
+        /// Parses a Kleene value from text. Accepted (case-insensitive, trimmed):
+        ///   - "true", "false", "unknown"
+        ///   - "-1", "0", "1"
+        /// </summary>
+        public static bool TryParse(string? input, out Kleene value)
         {
-            -1 => "False",
-             0 => "Unknown",
-             1 => "True",
-            _  => $"Invalid({_v})"
-        };
+            value = default;
+
+            if (string.IsNullOrWhiteSpace(input))
+                return false;
+
+            var s = input.Trim();
+
+            // canonical words (culture-invariant)
+            if (s.Equals("true", StringComparison.OrdinalIgnoreCase))
+            {
+                value = True;
+                return true;
+            }
+
+            if (s.Equals("false", StringComparison.OrdinalIgnoreCase))
+            {
+                value = False;
+                return true;
+            }
+
+            if (s.Equals("unknown", StringComparison.OrdinalIgnoreCase))
+            {
+                value = Unknown;
+                return true;
+            }
+
+            // canonical numeric strings (avoid culture-dependent parsing)
+            if (s == "1")  { value = True; return true; }
+            if (s == "0")  { value = Unknown; return true; }
+            if (s == "-1") { value = False; return true; }
+
+            return false;
+        }
+
+        public static Kleene Parse(string input)
+        {
+            if (!TryParse(input, out var value))
+                throw new FormatException($"Invalid Kleene value: '{input}'. Expected true/false/unknown or -1/0/1.");
+            return value;
+        }
+
+        /// <summary>
+        /// Fast formatting that writes "True", "False", or "Unknown" into the destination.
+        /// This is allocation-free and suitable for hot paths.
+        /// </summary>
+        public bool TryFormat(Span<char> destination, out int charsWritten)
+        {
+            ReadOnlySpan<char> text = _v switch
+            {
+                -1 => "False",
+                 0 => "Unknown",
+                 1 => "True",
+                _  => "Invalid"
+            };
+
+            if (destination.Length < text.Length)
+            {
+                charsWritten = 0;
+                return false;
+            }
+
+            text.CopyTo(destination);
+            charsWritten = text.Length;
+            return true;
+        }
+
+        /// <summary>
+        /// Convenience allocation-free formatting. Uses TryFormat internally.
+        /// </summary>
+        public override string ToString()
+        {
+            Span<char> buf = stackalloc char[7]; // "Unknown" is 7 chars
+            return TryFormat(buf, out var written)
+                ? new string(buf[..written])
+                : _v switch
+                {
+                    -1 => "False",
+                     0 => "Unknown",
+                     1 => "True",
+                    _  => $"Invalid({_v})"
+                };
+        }
 
         /// <summary>
         /// Creates a Kleene value from a raw value.

@@ -69,6 +69,12 @@ Kleene isAllowed = ruleResult.Default(Kleene.False);
 bool canProceed = isApproved.Default(false);
 ```
 
+Parsing from text is intentionally strict and case-insensitive:
+
+```csharp
+Kleene k = Kleene.Parse("unknown");
+```
+
 ---
 
 ## Algebraic design
@@ -282,6 +288,23 @@ Log("Decision deferred: insufficient data");
 ```
 
 That’s what Kleene is intended for.
+
+---
+
+## JSON (System.Text.Json)
+
+The included converter reads booleans, nulls, strings, and numeric tokens, and always writes a string:
+
+```csharp
+using KleeneLogic;
+using KleeneLogic.Serialization;
+using System.Text.Json;
+
+var opts = new JsonSerializerOptions();
+opts.Converters.Add(new KleeneJsonConverter());
+
+var k = JsonSerializer.Deserialize<Kleene>("null", opts); // Unknown
+```
 
 ---
 
