@@ -37,4 +37,9 @@ jobs:
         run: dotnet pack ./src/kleenelogic/kleenelogic.csproj -c Release --no-build -o ./artifacts
 
       - name: Publish to NuGet.org
-        run: dotnet nuget push "./artifacts/*.nupkg" --api-key "${{ secrets.NUGET_API_KEY }}" --source "https://api.nuget.org/v3/index.json" --skip-duplicate
+  - name: Publish to NuGet.org
+    run: |
+      dotnet nuget push "./artifacts/*.nupkg" \
+        --api-key "${{ secrets.NUGET_API_KEY }}" \
+        --source "https://api.nuget.org/v3/index.json" \
+        --skip-duplicate
