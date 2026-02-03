@@ -3,11 +3,8 @@ name: Publish NuGet
 on:
   push:
     tags:
-      - "v*.*.*"
+      - v*.*.*
   workflow_dispatch:
-
-permissions:
-  contents: read
 
 jobs:
   pack-and-publish:
@@ -15,31 +12,25 @@ jobs:
 
     steps:
       - name: Checkout
-      - uses: actions/checkout@v4
+        uses: actions/checkout@v4
 
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
         with:
-          # We're on .NET 10 (preview allowed).
-          dotnet-version: "10.0.x"
-          dotnet-quality: "preview"
+          dotnet-version: 10.0.x
+          dotnet-quality: preview
 
       - name: Restore
         run: dotnet restore ./kleene.sln
 
-      - name: Build (Release)
+      - name: Build
         run: dotnet build ./kleene.sln -c Release --no-restore
 
-      - name: Test (Release)
-        run: dotnet test ./kleene.sln -c Release --no-build --verbosity normal
+      - name: Test
+        run: dotnet test ./kleene.sln -c Release --no-build
 
-      - name: Pack (Release)
-        run: dotnet pack ./src/kleenelogic/kleenelogic.csproj -c Release --no-build -o ./artifacts
+      - name: Pack (library only)
+        run: dotnet pack ./src/kleenelogic/kleenelogic/kleenelogic.csproj -c Release --no-build -o ./artifacts
 
-      - name: Publish to NuGet.org
-  - name: Publish to NuGet.org
-    run: |
-      dotnet nuget push "./artifacts/*.nupkg" \
-        --api-key "${{ secrets.NUGET_API_KEY }}" \
-        --source "https://api.nuget.org/v3/index.json" \
-        --skip-duplicate
+      - name: Publish
+        run: dotnet nuget push "./artifacts/*.nupkg" --api-key "${{ secrets.NUGET_API_KEY }}" --source https://api.nuget.org/v3/index.json --skip-duplicate
