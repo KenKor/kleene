@@ -23,7 +23,7 @@ var result = a & b | !a;
 
 ## Why use this
 
-- `bool?` has the right values but no operators
+- `bool?` (nullable Boolean) has the right values but no operators
 - You can keep uncertainty without collapsing it to false
 - Operators are branch-free and follow K3 truth tables
 

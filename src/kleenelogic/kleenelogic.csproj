@@ -7,11 +7,11 @@
 
         <!-- NuGet package metadata -->
         <PackageId>kleenelogic</PackageId>
-        <Version>1.0.0</Version>
+        <Version>1.0.1</Version>
         <Authors>Ken Korsmit</Authors>
         <Company>Spatial Eye B.V.</Company>
         <Description>Kleene logic utilities for .NET.</Description>
-        <PackageTags>kleene;logic</PackageTags>
+        <PackageTags>kleene;logic;three-state;nullable-bool</PackageTags>
 
         <!-- License: "do what you want, I'm not accountable" -->
         <!-- Pick ONE: MIT (common) or Unlicense (public domain-like). -->

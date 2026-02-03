@@ -11,7 +11,7 @@ This repository contains a compact, fast implementation of **Kleene’s strong t
 - **Kleene** or **three-valued** logic gives you `True`, `False`, and `Unknown` with real logic operators
 - `Unknown` is designated uncertainty, not “false by accident”
 
-If you’ve pulled a nullable Boolean from a database and wished you could keep the uncertainty,
+If you’ve pulled a nullable Boolean (`bool?`) from a database and wished you could keep the uncertainty,
 this library is for that.
 
 ---
