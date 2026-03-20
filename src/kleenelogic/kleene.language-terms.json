@@ -1,0 +1,324 @@
+{
+  "invariant": {
+    "trueDisplay": "true",
+    "falseDisplay": "false",
+    "unknownDisplay": "unknown",
+    "trueTokens": ["true"],
+    "falseTokens": ["false"],
+    "unknownTokens": ["unknown", "maybe"]
+  },
+  "languages": {
+    "en": {
+      "trueDisplay": "yes",
+      "falseDisplay": "no",
+      "unknownDisplay": "unknown",
+      "trueTokens": ["yes"],
+      "falseTokens": ["no"],
+      "unknownTokens": ["unknown", "maybe"]
+    },
+    "nl": {
+      "trueDisplay": "ja",
+      "falseDisplay": "no",
+      "unknownDisplay": "onbekend",
+      "trueTokens": ["ja"],
+      "falseTokens": ["no", "nee"],
+      "unknownTokens": ["onbekend", "misschien"]
+    },
+    "fr": {
+      "trueDisplay": "oui",
+      "falseDisplay": "non",
+      "unknownDisplay": "inconnu",
+      "trueTokens": ["oui"],
+      "falseTokens": ["non"],
+      "unknownTokens": ["inconnu", "peut-être", "peut-etre"]
+    },
+    "ru": {
+      "trueDisplay": "да",
+      "falseDisplay": "нет",
+      "unknownDisplay": "неизвестно",
+      "trueTokens": ["да"],
+      "falseTokens": ["нет"],
+      "unknownTokens": ["неизвестно", "может быть"]
+    },
+    "de": {
+      "trueDisplay": "ja",
+      "falseDisplay": "nein",
+      "unknownDisplay": "unbekannt",
+      "trueTokens": ["ja"],
+      "falseTokens": ["nein"],
+      "unknownTokens": ["unbekannt", "vielleicht"]
+    },
+    "tr": {
+      "trueDisplay": "evet",
+      "falseDisplay": "hayır",
+      "unknownDisplay": "bilinmiyor",
+      "trueTokens": ["evet"],
+      "falseTokens": ["hayır", "hayir"],
+      "unknownTokens": ["bilinmiyor", "belki"]
+    },
+    "cs": {
+      "trueDisplay": "ano",
+      "falseDisplay": "ne",
+      "unknownDisplay": "neznámé",
+      "trueTokens": ["ano"],
+      "falseTokens": ["ne"],
+      "unknownTokens": ["neznámé", "nezname", "možná", "mozna"]
+    },
+    "cy": {
+      "trueDisplay": "ie",
+      "falseDisplay": "na",
+      "unknownDisplay": "anhysbys",
+      "trueTokens": ["ie"],
+      "falseTokens": ["na"],
+      "unknownTokens": ["anhysbys", "efallai"]
+    },
+    "fa": {
+      "trueDisplay": "بله",
+      "falseDisplay": "نه",
+      "unknownDisplay": "نامشخص",
+      "trueTokens": ["بله"],
+      "falseTokens": ["نه"],
+      "unknownTokens": ["نامشخص", "شاید"]
+    },
+    "fy": {
+      "trueDisplay": "ja",
+      "falseDisplay": "nee",
+      "unknownDisplay": "ûnbekend",
+      "trueTokens": ["ja"],
+      "falseTokens": ["nee"],
+      "unknownTokens": ["ûnbekend", "miskien"]
+    },
+    "ja": {
+      "trueDisplay": "はい",
+      "falseDisplay": "いいえ",
+      "unknownDisplay": "不明",
+      "trueTokens": ["はい"],
+      "falseTokens": ["いいえ"],
+      "unknownTokens": ["不明", "たぶん"]
+    },
+    "es": {
+      "trueDisplay": "sí",
+      "falseDisplay": "no",
+      "unknownDisplay": "desconocido",
+      "trueTokens": ["sí", "si"],
+      "falseTokens": ["no"],
+      "unknownTokens": ["desconocido", "quizá", "quiza"]
+    },
+    "it": {
+      "trueDisplay": "sì",
+      "falseDisplay": "no",
+      "unknownDisplay": "sconosciuto",
+      "trueTokens": ["sì", "si"],
+      "falseTokens": ["no"],
+      "unknownTokens": ["sconosciuto", "forse"]
+    },
+    "pt": {
+      "trueDisplay": "sim",
+      "falseDisplay": "não",
+      "unknownDisplay": "desconhecido",
+      "trueTokens": ["sim"],
+      "falseTokens": ["não", "nao"],
+      "unknownTokens": ["desconhecido", "talvez"]
+    },
+    "pl": {
+      "trueDisplay": "tak",
+      "falseDisplay": "nie",
+      "unknownDisplay": "nieznane",
+      "trueTokens": ["tak"],
+      "falseTokens": ["nie"],
+      "unknownTokens": ["nieznane", "może", "moze"]
+    },
+    "zh": {
+      "trueDisplay": "是",
+      "falseDisplay": "否",
+      "unknownDisplay": "未知",
+      "trueTokens": ["是"],
+      "falseTokens": ["否", "不是"],
+      "unknownTokens": ["未知", "可能"]
+    },
+    "ko": {
+      "trueDisplay": "예",
+      "falseDisplay": "아니요",
+      "unknownDisplay": "알 수 없음",
+      "trueTokens": ["예", "네"],
+      "falseTokens": ["아니요", "아니오"],
+      "unknownTokens": ["알 수 없음", "아마도"]
+    },
+    "ar": {
+      "trueDisplay": "نعم",
+      "falseDisplay": "لا",
+      "unknownDisplay": "غير معروف",
+      "trueTokens": ["نعم"],
+      "falseTokens": ["لا"],
+      "unknownTokens": ["غير معروف", "ربما"]
+    },
+    "hi": {
+      "trueDisplay": "हाँ",
+      "falseDisplay": "नहीं",
+      "unknownDisplay": "अज्ञात",
+      "trueTokens": ["हाँ", "हां"],
+      "falseTokens": ["नहीं"],
+      "unknownTokens": ["अज्ञात", "शायद"]
+    },
+    "sv": {
+      "trueDisplay": "ja",
+      "falseDisplay": "nej",
+      "unknownDisplay": "okänd",
+      "trueTokens": ["ja"],
+      "falseTokens": ["nej"],
+      "unknownTokens": ["okänd", "kanske"]
+    },
+    "da": {
+      "trueDisplay": "ja",
+      "falseDisplay": "nej",
+      "unknownDisplay": "ukendt",
+      "trueTokens": ["ja"],
+      "falseTokens": ["nej"],
+      "unknownTokens": ["ukendt", "måske"]
+    },
+    "no": {
+      "trueDisplay": "ja",
+      "falseDisplay": "nei",
+      "unknownDisplay": "ukjent",
+      "trueTokens": ["ja"],
+      "falseTokens": ["nei"],
+      "unknownTokens": ["ukjent", "kanskje"]
+    },
+    "fi": {
+      "trueDisplay": "kyllä",
+      "falseDisplay": "ei",
+      "unknownDisplay": "tuntematon",
+      "trueTokens": ["kyllä", "kylla"],
+      "falseTokens": ["ei"],
+      "unknownTokens": ["tuntematon", "ehkä", "ehka"]
+    },
+    "el": {
+      "trueDisplay": "ναι",
+      "falseDisplay": "όχι",
+      "unknownDisplay": "άγνωστο",
+      "trueTokens": ["ναι"],
+      "falseTokens": ["όχι", "οχι"],
+      "unknownTokens": ["άγνωστο", "ισως", "ίσως"]
+    },
+    "he": {
+      "trueDisplay": "כן",
+      "falseDisplay": "לא",
+      "unknownDisplay": "לא ידוע",
+      "trueTokens": ["כן"],
+      "falseTokens": ["לא"],
+      "unknownTokens": ["לא ידוע", "אולי"]
+    },
+    "uk": {
+      "trueDisplay": "так",
+      "falseDisplay": "ні",
+      "unknownDisplay": "невідомо",
+      "trueTokens": ["так"],
+      "falseTokens": ["ні"],
+      "unknownTokens": ["невідомо", "можливо"]
+    },
+    "ro": {
+      "trueDisplay": "da",
+      "falseDisplay": "nu",
+      "unknownDisplay": "necunoscut",
+      "trueTokens": ["da"],
+      "falseTokens": ["nu"],
+      "unknownTokens": ["necunoscut", "poate"]
+    },
+    "hu": {
+      "trueDisplay": "igen",
+      "falseDisplay": "nem",
+      "unknownDisplay": "ismeretlen",
+      "trueTokens": ["igen"],
+      "falseTokens": ["nem"],
+      "unknownTokens": ["ismeretlen", "talán", "talan"]
+    },
+    "id": {
+      "trueDisplay": "ya",
+      "falseDisplay": "tidak",
+      "unknownDisplay": "tidak diketahui",
+      "trueTokens": ["ya"],
+      "falseTokens": ["tidak"],
+      "unknownTokens": ["tidak diketahui", "mungkin"]
+    },
+    "ms": {
+      "trueDisplay": "ya",
+      "falseDisplay": "tidak",
+      "unknownDisplay": "tidak diketahui",
+      "trueTokens": ["ya"],
+      "falseTokens": ["tidak"],
+      "unknownTokens": ["tidak diketahui", "mungkin"]
+    },
+    "th": {
+      "trueDisplay": "ใช่",
+      "falseDisplay": "ไม่ใช่",
+      "unknownDisplay": "ไม่ทราบ",
+      "trueTokens": ["ใช่"],
+      "falseTokens": ["ไม่ใช่"],
+      "unknownTokens": ["ไม่ทราบ", "อาจจะ"]
+    },
+    "vi": {
+      "trueDisplay": "có",
+      "falseDisplay": "không",
+      "unknownDisplay": "không rõ",
+      "trueTokens": ["có", "co"],
+      "falseTokens": ["không", "khong"],
+      "unknownTokens": ["không rõ", "khong ro", "có thể", "co the"]
+    },
+    "bg": {
+      "trueDisplay": "да",
+      "falseDisplay": "не",
+      "unknownDisplay": "неизвестно",
+      "trueTokens": ["да"],
+      "falseTokens": ["не"],
+      "unknownTokens": ["неизвестно", "може би"]
+    },
+    "hr": {
+      "trueDisplay": "da",
+      "falseDisplay": "ne",
+      "unknownDisplay": "nepoznato",
+      "trueTokens": ["da"],
+      "falseTokens": ["ne"],
+      "unknownTokens": ["nepoznato", "možda", "mozda"]
+    },
+    "sk": {
+      "trueDisplay": "áno",
+      "falseDisplay": "nie",
+      "unknownDisplay": "neznáme",
+      "trueTokens": ["áno", "ano"],
+      "falseTokens": ["nie"],
+      "unknownTokens": ["neznáme", "nezname", "možno", "mozno"]
+    },
+    "sl": {
+      "trueDisplay": "da",
+      "falseDisplay": "ne",
+      "unknownDisplay": "neznano",
+      "trueTokens": ["da"],
+      "falseTokens": ["ne"],
+      "unknownTokens": ["neznano", "morda"]
+    },
+    "et": {
+      "trueDisplay": "jah",
+      "falseDisplay": "ei",
+      "unknownDisplay": "teadmata",
+      "trueTokens": ["jah"],
+      "falseTokens": ["ei"],
+      "unknownTokens": ["teadmata", "võib-olla", "voib-olla"]
+    },
+    "lv": {
+      "trueDisplay": "jā",
+      "falseDisplay": "nē",
+      "unknownDisplay": "nezināms",
+      "trueTokens": ["jā", "ja"],
+      "falseTokens": ["nē", "ne"],
+      "unknownTokens": ["nezināms", "nezinams", "varbūt", "varbut"]
+    },
+    "lt": {
+      "trueDisplay": "taip",
+      "falseDisplay": "ne",
+      "unknownDisplay": "nežinoma",
+      "trueTokens": ["taip"],
+      "falseTokens": ["ne"],
+      "unknownTokens": ["nežinoma", "nezinoma", "galbūt", "galbut"]
+    }
+  }
+}

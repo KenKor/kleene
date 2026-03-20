@@ -72,8 +72,15 @@ bool canProceed = isApproved.Default(false);
 Parsing from text is intentionally strict and case-insensitive:
 
 ```csharp
-Kleene k = Kleene.Parse("unknown");
+Kleene k = Kleene.Parse("unknown"); // invariant default
+Kleene fr = Kleene.Parse("inconnu", CultureInfo.GetCultureInfo("fr-FR"));
+Kleene en = Kleene.Parse("yes", CultureInfo.GetCultureInfo("en-US"));
 ```
+
+No-culture overloads (`Parse(string)`, `TryParse(string, out _)`, `ToString()`) always use invariant terms (`true` / `false` / `unknown`).
+English culture (`en-*`) uses `yes` / `no` / `unknown`.
+Invariant input tokens `true` / `false` / `maybe` are accepted even when a specific non-invariant culture is provided.
+Language terms are loaded from `kleene.language-terms.json` next to the library assembly (with safe fallback defaults when the file is unavailable).
 
 ---
 
@@ -293,7 +300,7 @@ That’s what Kleene is intended for.
 
 ## JSON (System.Text.Json)
 
-The included converter reads booleans, nulls, strings, and numeric tokens, and always writes a string:
+The included converter reads booleans, nulls, strings, and numeric tokens, and writes `true` / `false` / `null` (bool?-compatible):
 
 ```csharp
 using KleeneLogic;
@@ -329,4 +336,3 @@ If everything is always known, `bool` is simpler and better.
 |---------|----------------------|
 | 1.0.0   | Initial release      |
 | 1.0.1   | Test release process |
-

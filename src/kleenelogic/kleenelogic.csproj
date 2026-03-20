@@ -7,11 +7,11 @@
 
         <!-- NuGet package metadata -->
         <PackageId>kleenelogic</PackageId>
-        <Version>1.0.1</Version>
+        <Version>1.0.2</Version>
         <Authors>Ken Korsmit</Authors>
         <Company>Spatial Eye B.V.</Company>
         <Description>Kleene logic utilities for .NET.</Description>
-        <PackageTags>kleene;logic;three-state;nullable-bool</PackageTags>
+        <PackageTags>kleene;logic;three-state;nullable-bool;true;false;maybe;translated-bool</PackageTags>
 
         <!-- License: "do what you want, I'm not accountable" -->
         <!-- Pick ONE: MIT (common) or Unlicense (public domain-like). -->
@@ -44,6 +44,11 @@
 
     <ItemGroup>
         <None Include="README.md" Pack="true" PackagePath="\" />
+        <None Include="kleene.language-terms.json"
+              CopyToOutputDirectory="PreserveNewest"
+              Pack="true"
+              PackagePath="contentFiles/any/any/"
+              PackageCopyToOutput="true" />
     </ItemGroup>
 
 </Project>

@@ -45,10 +45,16 @@ bool canProceed = isApproved.Default(false);
 ## Parsing
 
 ```csharp
-Kleene k = Kleene.Parse("unknown");
+Kleene k = Kleene.Parse("unknown"); // invariant default
 ```
 
-Accepted inputs are case-insensitive `true`, `false`, `unknown`, or `-1`, `0`, `1`.
+Accepted invariant inputs are case-insensitive `true`, `false`, `unknown`.
+Alias for unknown: `maybe`.
+Numeric forms `-1`, `0`, `1` are also accepted.
+Overloads accepting an `IFormatProvider` enable language-specific tokens.
+No-culture overloads use invariant terms; English culture (`en-*`) uses `yes`, `no`, `unknown`.
+Invariant input tokens `true`, `false`, `maybe` are accepted even with an explicit non-invariant culture.
+Language terms are read from `kleene.language-terms.json` next to the assembly, with built-in fallback defaults.
 
 ## JSON (System.Text.Json)
 

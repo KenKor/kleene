@@ -30,9 +30,9 @@ public sealed class KleeneTests
         }
 
         [Theory]
-        [InlineData(-1, "False")]
-        [InlineData(0,  "Unknown")]
-        [InlineData(1,  "True")]
+        [InlineData(-1, "false")]
+        [InlineData(0,  "unknown")]
+        [InlineData(1,  "true")]
         public void ToString_ReturnsExpectedText(sbyte raw, string expected)
         {
             Assert.Equal(expected, Kleene.FromRaw(raw).ToString());
@@ -265,6 +265,37 @@ public sealed class KleeneTests
         {
             Assert.True(Kleene.False.CompareTo(Kleene.Unknown) < 0);
             Assert.True(Kleene.Unknown.CompareTo(Kleene.True) < 0);
+            Assert.True(Kleene.True.CompareTo(Kleene.Unknown) > 0);
+            Assert.True(Kleene.Unknown.CompareTo(Kleene.False) > 0);
             Assert.Equal(0, Kleene.True.CompareTo(Kleene.FromRaw(1)));
-    }
+        }
+
+        [Fact]
+        public void CompareTo_Object_UsesNaturalOrdering()
+        {
+            IComparable falseComparable = Kleene.False;
+            IComparable unknownComparable = Kleene.Unknown;
+            IComparable trueComparable = Kleene.True;
+
+            Assert.True(falseComparable.CompareTo(Kleene.Unknown) < 0);
+            Assert.True(unknownComparable.CompareTo(Kleene.True) < 0);
+            Assert.True(trueComparable.CompareTo(Kleene.Unknown) > 0);
+            Assert.Equal(0, trueComparable.CompareTo(Kleene.FromRaw(1)));
+        }
+
+        [Fact]
+        public void CompareTo_Object_NullIsLessThanAnyInstance()
+        {
+            IComparable comparable = Kleene.False;
+            Assert.True(comparable.CompareTo(null) > 0);
+        }
+
+        [Fact]
+        public void CompareTo_Object_InvalidType_Throws()
+        {
+            IComparable comparable = Kleene.Unknown;
+
+            var ex = Assert.Throws<ArgumentException>(() => comparable.CompareTo("not-a-kleene"));
+            Assert.Equal("obj", ex.ParamName);
+        }
 }

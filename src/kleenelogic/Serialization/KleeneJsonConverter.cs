@@ -39,7 +39,21 @@ public sealed class KleeneJsonConverter : JsonConverter<Kleene>
     }
 
     public override void Write(Utf8JsonWriter writer, Kleene value, JsonSerializerOptions options)
-        => writer.WriteStringValue(value.ToString());
+    {
+        if (value.IsTrue)
+        {
+            writer.WriteBooleanValue(true);
+            return;
+        }
+
+        if (value.IsFalse)
+        {
+            writer.WriteBooleanValue(false);
+            return;
+        }
+
+        writer.WriteNullValue();
+    }
 
     private static string GetRawNumberText(ref Utf8JsonReader reader)
     {
