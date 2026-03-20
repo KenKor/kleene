@@ -2,6 +2,7 @@
 using System.Globalization;
 using System.Runtime.CompilerServices;
 using System.Text.Json;
+using System.Text.RegularExpressions;
 
 namespace KleeneLogic
 {
@@ -176,6 +177,55 @@ namespace KleeneLogic
             }
 
             return value;
+        }
+
+        /// <summary>
+        /// Enumerates all supported ISO language codes, prioritizing the provided culture when available.
+        /// </summary>
+        public static IEnumerable<string> EnumerateLanguageCodes(CultureInfo culture)
+        {
+            ArgumentNullException.ThrowIfNull(culture);
+
+            var preferredCode = NormalizeLanguageCode(culture.Name) ??
+                                NormalizeLanguageCode(culture.TwoLetterISOLanguageName);
+
+            if (preferredCode is not null && LanguageTermsByIsoCode.ContainsKey(preferredCode))
+                yield return preferredCode;
+
+            var orderedCodes = new List<string>(LanguageTermsByIsoCode.Keys);
+            orderedCodes.Sort(StringComparer.Ordinal);
+
+            foreach (var code in orderedCodes)
+            {
+                if (preferredCode is not null &&
+                    code.Equals(preferredCode, StringComparison.OrdinalIgnoreCase))
+                {
+                    continue;
+                }
+
+                yield return code;
+            }
+        }
+
+        /// <summary>
+        /// Enumerates Kleene values with their culture-specific string representation,
+        /// optionally filtered by a regular expression.
+        /// </summary>
+        public static IEnumerable<(Kleene, string)> Enumerate(CultureInfo? culture = null, Regex? pattern = null)
+        {
+            var resolvedCulture = culture ?? CultureInfo.InvariantCulture;
+
+            var falseText = False.ToString(resolvedCulture);
+            if (pattern is null || pattern.IsMatch(falseText))
+                yield return (False, falseText);
+
+            var unknownText = Unknown.ToString(resolvedCulture);
+            if (pattern is null || pattern.IsMatch(unknownText))
+                yield return (Unknown, unknownText);
+
+            var trueText = True.ToString(resolvedCulture);
+            if (pattern is null || pattern.IsMatch(trueText))
+                yield return (True, trueText);
         }
 
         /// <summary>

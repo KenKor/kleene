@@ -1,6 +1,7 @@
 ﻿#nullable enable
 using System;
 using System.Globalization;
+using System.Text.RegularExpressions;
 using System.Text.Json;
 using KleeneLogic;
 using KleeneLogic.Serialization;
@@ -215,6 +216,41 @@ public sealed class KleeneParsingAndJsonTests
         Assert.Equal("true", Kleene.True.ToString(culture));
         Assert.True(Kleene.TryParse("true", culture, out var yes) && yes == Kleene.True);
         Assert.False(Kleene.TryParse("ja", culture, out _));
+    }
+
+    [Fact]
+    public void EnumerateLanguageCodes_ReturnsSupportedCodes_AndPrefersRequestedCulture()
+    {
+        var culture = CultureInfo.GetCultureInfo("nl-NL");
+        var codes = Kleene.EnumerateLanguageCodes(culture).ToArray();
+
+        Assert.NotEmpty(codes);
+        Assert.Equal("nl", codes[0]);
+        Assert.Contains("en", codes);
+        Assert.DoesNotContain("nl-NL", codes);
+    }
+
+    [Fact]
+    public void Enumerate_DefaultsToInvariantCulture_WhenCultureIsNull()
+    {
+        var entries = Kleene.Enumerate().ToArray();
+
+        Assert.Equal(3, entries.Length);
+        Assert.Equal((Kleene.False, "false"), entries[0]);
+        Assert.Equal((Kleene.Unknown, "unknown"), entries[1]);
+        Assert.Equal((Kleene.True, "true"), entries[2]);
+    }
+
+    [Fact]
+    public void Enumerate_UsesCultureAndRegexFilter()
+    {
+        var culture = CultureInfo.GetCultureInfo("fr-FR");
+        var regex = new Regex("^o", RegexOptions.IgnoreCase);
+
+        var entries = Kleene.Enumerate(culture, regex).ToArray();
+
+        Assert.Single(entries);
+        Assert.Equal((Kleene.True, "oui"), entries[0]);
     }
 
     [Fact]
