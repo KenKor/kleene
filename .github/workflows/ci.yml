@@ -12,6 +12,7 @@ permissions:
 
 jobs:
   build-and-test:
+    name: build-and-test (hosted)
     runs-on: ubuntu-latest
 
     steps:
