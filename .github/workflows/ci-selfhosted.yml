@@ -1,0 +1,40 @@
+# Pilot workflow for the iKendy self-hosted runner (BuildServer project).
+# Kept separate from ci.yml so the GitHub-hosted pipeline stays authoritative
+# until this one has proven itself. Once it has, ci.yml can simply swap its
+# runs-on and this file can go away.
+name: CI (self-hosted)
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build-and-test:
+    runs-on: [self-hosted, linux, imac]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      # No actions/setup-dotnet here: iKendy already has SDK 10.0.111
+      # installed system-wide, and downloading a second copy into the runner
+      # tool cache on every run is the main thing self-hosting is meant to avoid.
+      - name: Show toolchain
+        run: |
+          dotnet --version
+          dotnet --list-sdks
+
+      - name: Restore
+        run: dotnet restore ./kleene.sln
+
+      - name: Build (Release)
+        run: dotnet build ./kleene.sln -c Release --no-restore
+
+      - name: Test (Release)
+        run: dotnet test ./kleene.sln -c Release --no-build --verbosity normal
