@@ -31,11 +31,16 @@ jobs:
           dotnet --version
           dotnet --list-sdks
 
+      # -m:1 keeps MSBuild in one process. iKendy runs Ubuntu's own rebuild of .NET 10
+      # (dotnet-runtime-10.0 10.0.12-0ubuntu1~26.04.1), whose out-of-process MSBuild worker
+      # nodes intermittently abort with "Internal CLR error. (0x80131506)": dotnet/runtime#130577,
+      # open, not reproducible with Microsoft's own build. Remove it once Ubuntu ships a fixed
+      # runtime or iKendy moves to Microsoft's build.
       - name: Restore
-        run: dotnet restore ./kleene.sln
+        run: dotnet restore ./kleene.sln -m:1
 
       - name: Build (Release)
-        run: dotnet build ./kleene.sln -c Release --no-restore
+        run: dotnet build ./kleene.sln -c Release --no-restore -m:1
 
       - name: Test (Release)
-        run: dotnet test ./kleene.sln -c Release --no-build --verbosity normal
+        run: dotnet test ./kleene.sln -c Release --no-build --verbosity normal -m:1
